@@ -1,6 +1,6 @@
 # Oculun
 
-Oculun is a lightweight PlatformIO library that provides higher-level text utilities for SSD1306 OLED displays based on the Adafruit GFX ecosystem.
+Oculun is a lightweight PlatformIO library that provides higher-level text utilities for SSD1306 display displays based on the Adafruit GFX ecosystem.
 
 The project name is derived from oculus (Latin for eye), reflecting its purpose as a visual output helper.
 Oculun aims to simplify common text-rendering tasks while remaining minimal, predictable, and extensible.
@@ -18,7 +18,7 @@ The library is designed with the following principles:
 
 ## Features
 
-- SSD1306 OLED initialization via I²C
+- SSD1306 display initialization via I²C
 - Text rendering with configurable size and position
 - Automatic horizontal and vertical text centering
 - Multiline text support
@@ -46,7 +46,7 @@ lib_deps =
 
 ### Local Library
 
-Alternatively, place the library in your project’s lib directory:
+Alternatively, place the library in your project’s `lib` directory:
 ```
 lib/
 └── oculun/
@@ -57,6 +57,8 @@ lib/
 ```
 
 ## Basic Usage
+
+### Include and Initialize
 
 ```cpp
 #include <Oculun.h>
@@ -77,7 +79,7 @@ The constructor accepts the I²C SDA and SCL pin numbers, allowing flexible pin 
 Writes text at a specified position.
 
 ```cpp
-oled.writeText("Hello World", 2, 0, 0);
+display.writeText("Hello World", 2, 0, 0);
 ```
 
 **Parameters**
@@ -95,7 +97,7 @@ Centers text both horizontally and vertically on the display.
 Multiline text is supported using newline characters (`\n`).
 
 ```cpp
-oled.centerText("Hello\nWorld", 2);
+display.centerText("Hello\nWorld", 2);
 ```
 
 **Parameters**
@@ -117,7 +119,7 @@ Inverts the display colors for visual feedback.
 **Parameters**
 
 ```cpp
-oled.flash(3, 200);
+display.flash(3, 200);
 ```
 
 | Name | Type | Description |
@@ -133,10 +135,10 @@ oled.flash(3, 200);
 - Text metrics assume the default GFX font; custom fonts may require adjustments.
 - The library prioritizes clarity over aggressive optimization.
 
-
 ## Project Status
 
-Oculun is currently under active early development. The API is stable for basic usage, but additional features and refinements are planned.
+Oculun is currently in **beta**.
+The API is stable for basic usage, but additional features and refinements are planned.
 
 ## Roadmap
 
