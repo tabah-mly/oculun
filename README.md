@@ -41,7 +41,7 @@ These dependencies are standard within the Arduino / PlatformIO ecosystem and ar
 Add the following to your platformio.ini:
 ```ini
 lib_deps =
-  https://github.com/kuu-shi/oculun.git
+  https://github.com/tabah-mly/oculun.git
 ```
 
 ### Local Library
