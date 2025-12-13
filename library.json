@@ -1,0 +1,30 @@
+{
+  "name": "oculun",
+  "version": "1.0.0-beta",
+  "description": "A library that has additional functions for SSD1306.",
+  "keywords": [
+    "utility",
+    "esp32",
+    "arduino",
+    "display",
+    "ssd1306"
+  ],
+  "authors": [
+    {
+      "name": "Tabah Mulya",
+      "url": "https://github.com/tabah-mly"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tabah-mly/oculun.git"
+  },
+  "frameworks": [
+    "arduino"
+  ],
+  "platforms": "*",
+  "dependencies": {
+    "adafruit/Adafruit SSD1306": "^2.5.15"
+  }
+}
