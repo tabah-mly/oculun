@@ -71,9 +71,59 @@ void setup() {
 The constructor accepts the I²C SDA and SCL pin numbers, allowing flexible pin assignment (e.g. ESP32).
 
 ## API Reference
+
 ### writeText
+
+Writes text at a specified position.
+
+```cpp
+oled.writeText("Hello World", 2, 0, 0);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `text` | `String` | Text to display |
+| `size` | `uint8_t` | Text scale factor (default: `2`) |
+| `x` | `uint8_t` | Horizontal cursor position (default: `0`) |
+| `y` | `uint8_t` | Vertical cursor position (default: `0`) |
+
 ### centerText
+
+Centers text both horizontally and vertically on the display.
+Multiline text is supported using newline characters (`\n`).
+
+```cpp
+oled.centerText("Hello\nWorld", 2);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `text` | `String` | Text to display |
+| `size` | `uint8_t` | Text scale factor (default: `2`) |
+
+**Notes**
+- Uses the default Adafruit GFX font (6×8 pixels per character at size 1)
+- Calculates alignment dynamically per line
+- Clears the display before rendering
+
 ### flash
+
+Inverts the display colors for visual feedback.
+
+**Parameters**
+
+```cpp
+oled.flash(3, 200);
+```
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `times` | `uint8_t` | Number of flash cycles (default: `2`) |
+| `duration` | `uint16_t` | Duration per state in milliseconds (default: `150`) |
 
 ## Design Considerations
 
