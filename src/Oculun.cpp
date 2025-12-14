@@ -21,7 +21,7 @@ void Oculun::flash(uint8_t times, uint16_t duration) {
   }
 }
 
-void Oculun::writeText(const String& text, uint8_t size, uint8_t x, uint8_t y) {
+void Oculun::writeText(const char* text, uint8_t size, uint8_t x, uint8_t y) {
   display.clearDisplay();
   display.setTextColor(SSD1306_WHITE);
   display.setTextSize(size);
@@ -30,42 +30,52 @@ void Oculun::writeText(const String& text, uint8_t size, uint8_t x, uint8_t y) {
   display.display();
 }
 
-void Oculun::centerText(const String& text, uint8_t size) {
+void Oculun::writeText(const String& text, uint8_t size, uint8_t x, uint8_t y) {
+  writeText(text.c_str(), size, x, y);
+}
+
+void Oculun::centerText(const char* text, uint8_t size) {
   uint16_t w = display.width();
   uint16_t h = display.height();
 
-  uint16_t charW = 6 * size;
-  uint16_t charH = 8 * size;
+  uint8_t charW = 6 * size;
+  uint8_t charH = 8 * size;
 
   uint8_t lines = 1;
-  for (char c : text) {
-    if (c == '\n') {
+  for (const char* p = text; *p; ++p) {
+    if (*p == '\n') {
       lines++;
     }
   }
 
-  uint8_t totalH = lines * charH;
-  uint8_t yStart = (h - totalH) / 2;
+  uint16_t totalH = lines * charH;
+  uint16_t y = (h - totalH) / 2;
 
   display.clearDisplay();
   display.setTextColor(SSD1306_WHITE);
   display.setTextSize(size);
 
-  uint8_t y = yStart;
-  String line = "";
-
-  for (uint8_t i = 0; i <= text.length(); i++) {
-    if (i == text.length() || text[i] == '\n') {
-      uint8_t textWidth = line.length() * charW;
-      uint8_t x = (w - textWidth) / 2;
-      display.setCursor(x, y);
-      display.print(line);
-      y += charH;
-      line = "";
-    } else {
-      line += text[i];
+  const char* lineStart = text;
+  while (*lineStart) {
+    const char* lineEnd = lineStart;
+    while (*lineEnd && *lineEnd != '\n') {
+      lineEnd++;
     }
+
+    uint8_t len = lineEnd - lineStart;
+    uint16_t textW = len * charW;
+    uint16_t x = (w - textW) / 2;
+
+    display.setCursor(x, y);
+    display.write((const uint8_t*)lineStart, len);
+
+    y += charH;
+    lineStart = (*lineEnd == '\n') ? lineEnd + 1 : lineEnd;
   }
 
   display.display();
+}
+
+void Oculun::centerText(const String& text, uint8_t size) {
+  centerText(text.c_str(), size);
 }
