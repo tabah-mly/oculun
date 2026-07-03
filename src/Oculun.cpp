@@ -79,3 +79,22 @@ void Oculun::centerText(const char* text, uint8_t size) {
 void Oculun::centerText(const String& text, uint8_t size) {
   centerText(text.c_str(), size);
 }
+
+void Oculun::clear() {
+  display.clearDisplay();
+}
+
+void Oculun::addText(const char* text, uint8_t size, uint8_t x, uint8_t y) {
+  display.setTextColor(SSD1306_WHITE);
+  display.setTextSize(size);
+  display.setCursor(x, y);
+  display.print(text);
+}
+
+void Oculun::addText(const String& text, uint8_t size, uint8_t x, uint8_t y) {
+  addText(text.c_str(), size, x, y);
+}
+
+void Oculun::show() {
+  display.display();
+}
